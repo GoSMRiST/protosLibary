@@ -1,1 +1,1 @@
-module ProtosLib
+ module github.com/GoSMRiST/protosLibary
