@@ -1,1 +1,1 @@
-module awesomeProject
+module ProtosLib
