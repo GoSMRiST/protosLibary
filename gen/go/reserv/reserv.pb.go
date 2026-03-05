@@ -83,7 +83,7 @@ func (x *ReservRequest) GetTitle() string {
 
 type ReservResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ReservationId int64                  `protobuf:"varint,1,opt,name=reservation_id,json=reservationId,proto3" json:"reservation_id,omitempty"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -118,11 +118,11 @@ func (*ReservResponse) Descriptor() ([]byte, []int) {
 	return file_reserv_reserv_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ReservResponse) GetReservationId() int64 {
+func (x *ReservResponse) GetResult() bool {
 	if x != nil {
-		return x.ReservationId
+		return x.Result
 	}
-	return 0
+	return false
 }
 
 type ReturnRequest struct {
@@ -409,9 +409,9 @@ const file_reserv_reserv_proto_rawDesc = "" +
 	"\rReservRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
 	"\x06author\x18\x02 \x01(\tR\x06author\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\"7\n" +
-	"\x0eReservResponse\x12%\n" +
-	"\x0ereservation_id\x18\x01 \x01(\x03R\rreservationId\"V\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\"(\n" +
+	"\x0eReservResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"V\n" +
 	"\rReturnRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
 	"\x06author\x18\x02 \x01(\tR\x06author\x12\x14\n" +
