@@ -4,7 +4,7 @@
 // 	protoc        v7.34.0
 // source: reserv/reserv.proto
 
-package library
+package reserv
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -434,7 +434,7 @@ const file_reserv_reserv_proto_rawDesc = "" +
 	"ReservBook\x12\x15.reserv.ReservRequest\x1a\x16.reserv.ReservResponse\x12;\n" +
 	"\n" +
 	"ReturnBook\x12\x15.reserv.ReturnRequest\x1a\x16.reserv.ReturnResponse\x12K\n" +
-	"\x10CheckReservation\x12\x1a.reserv.CheckReservRequest\x1a\x1b.reserv.CheckReservResponseB\x17Z\x15../../library;libraryb\x06proto3"
+	"\x10CheckReservation\x12\x1a.reserv.CheckReservRequest\x1a\x1b.reserv.CheckReservResponseB7Z5github.com/GoSMRiST/protosLibary/gen/go/reserv;reservb\x06proto3"
 
 var (
 	file_reserv_reserv_proto_rawDescOnce sync.Once

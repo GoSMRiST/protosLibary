@@ -4,7 +4,7 @@
 // - protoc             v7.34.0
 // source: reserv/reserv.proto
 
-package library
+package reserv
 
 import (
 	context "context"

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package reserv;
 
-option go_package = "../../library;library";
+option go_package = "github.com/GoSMRiST/protosLibary/gen/go/reserv;reserv";
 
 service Reserv {
   rpc ReservBook (ReservRequest) returns (ReservResponse);
