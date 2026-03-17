@@ -4,7 +4,7 @@ package auth;
 
 option go_package = "github.com/GoSMRiST/protosLibary/gen/go/auth;auth";
 
-service Book {
+service Auth {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
