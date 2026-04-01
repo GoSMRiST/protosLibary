@@ -19,7 +19,6 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Auth_Login_FullMethodName         = "/auth.Auth/Login"
 	Auth_ValidateToken_FullMethodName = "/auth.Auth/ValidateToken"
 )
 
@@ -27,7 +26,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthClient interface {
-	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	ValidateToken(ctx context.Context, in *ValidateTokenRequest, opts ...grpc.CallOption) (*ValidateTokenResponse, error)
 }
 
@@ -37,16 +35,6 @@ type authClient struct {
 
 func NewAuthClient(cc grpc.ClientConnInterface) AuthClient {
 	return &authClient{cc}
-}
-
-func (c *authClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, Auth_Login_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *authClient) ValidateToken(ctx context.Context, in *ValidateTokenRequest, opts ...grpc.CallOption) (*ValidateTokenResponse, error) {
@@ -63,7 +51,6 @@ func (c *authClient) ValidateToken(ctx context.Context, in *ValidateTokenRequest
 // All implementations must embed UnimplementedAuthServer
 // for forward compatibility.
 type AuthServer interface {
-	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
@@ -75,9 +62,6 @@ type AuthServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAuthServer struct{}
 
-func (UnimplementedAuthServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Login not implemented")
-}
 func (UnimplementedAuthServer) ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ValidateToken not implemented")
 }
@@ -100,24 +84,6 @@ func RegisterAuthServer(s grpc.ServiceRegistrar, srv AuthServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&Auth_ServiceDesc, srv)
-}
-
-func _Auth_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthServer).Login(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Auth_Login_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).Login(ctx, req.(*LoginRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Auth_ValidateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -145,10 +111,6 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "auth.Auth",
 	HandlerType: (*AuthServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Login",
-			Handler:    _Auth_Login_Handler,
-		},
 		{
 			MethodName: "ValidateToken",
 			Handler:    _Auth_ValidateToken_Handler,
